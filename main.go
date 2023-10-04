@@ -3,6 +3,7 @@ package main
 import (
 	"booking-app/helper"
 	"fmt"
+	// "strconv"
 )
 
 type UserData struct {
@@ -60,10 +61,12 @@ func greetUsers(conferenceName string, conferenceTickets int, remainingTickets u
 	fmt.Println()
 }
 
-func getFirstNames(bookings []map[string]string) []string {
+// func getFirstNames(bookings []map[string]string) []string {
+func getFirstNames(bookings []UserData) []string {
 	firstNames := []string{}
 	for _, booking := range bookings {
-		firstNames = append(firstNames, booking["firstName"])
+		// firstNames = append(firstNames, booking["firstName"])
+		firstNames = append(firstNames, booking.firstName)
 	}
 	return firstNames
 }
@@ -86,15 +89,22 @@ func getUserInput() (string, string, string, uint) {
 	return firstName, lastName, email, userTickets
 }
 
+// func bookTicket(bookings *[]map[string]string, remainingTickets *uint, userTickets uint, firstName string, lastName string, email string, conferenceName string) {
 func bookTicket(bookings *[]UserData, remainingTickets *uint, userTickets uint, firstName string, lastName string, email string, conferenceName string) {
 	*remainingTickets -= userTickets
 
+	// var userData = make(map[string]string)
 	var userData = UserData{
 		firstName:       firstName,
 		lastName:        lastName,
 		email:           email,
 		numberOfTickets: userTickets,
 	}
+
+	// userData["firstName"] = firstName
+	// userData["lasttName"] = lastName
+	// userData["email"] = email
+	// userData["numberOfTickets"] = strconv.FormatUint(uint64(userTickets), 10)
 
 	*bookings = append(*bookings, userData)
 
